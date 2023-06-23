@@ -67,4 +67,36 @@ public class Main {
         });
         openMenu();
         mainFrame.setVisible(true);
+
+        public static void openFinalMenu(int winner,int coins){
+            Main.coins += coins;
+            mainFrame.add(new FinalMenu(winner, coins));
+            reload();
+        }
+
+        public static void getFromFile(){
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(new File("save.txt")));
+                coins = Integer.parseInt(reader.readLine());
+                countOfPidkazka = Integer.parseInt(reader.readLine());
+                countOfPechatka = Integer.parseInt(reader.readLine());
+                countOfTsarBimba = Integer.parseInt(reader.readLine());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public static void saveToFile(){
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(new File("save.txt")));
+                writer.write(coins + System.lineSeparator());
+                writer.write(countOfPidkazka + System.lineSeparator());
+                writer.write(countOfPechatka + System.lineSeparator());
+                writer.write(countOfTsarBimba + System.lineSeparator());
+                writer.flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
